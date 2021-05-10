@@ -1,6 +1,16 @@
 const inquirer = require("inquirer");
 const fs = "fs";
 
+const questions = [
+    {
+        type: "list",
+        name: "addTeamMember",
+        message: "What would you like to do?",
+        choices: ["Add an engineer", "Add an intern", "Finish building team"],
+
+    },
+]
+
 const managerQuestions = [
   {
     type: "input",
@@ -23,6 +33,14 @@ const managerQuestions = [
     name: "managerOfficeNumber",
     message: "What is your managers office number?",
   },
+
+  {
+    type: "list",
+    name: "addTeamMember",
+    message: "What would you like to do?",
+    choices: ["Add an engineer", "Add an intern", "Finish building team"],
+
+},
 ];
 
 const engineerQuestions = [
@@ -70,3 +88,24 @@ const internQuestions = [
         message: "What is your interns school?",
       },     
 ];
+
+function start(){
+    inquirer.prompt(managerQuestions).then((managerAnswers) => {
+        console.log(managerAnswers);
+
+        var choice = managerAnswers.addTeamMember;
+        if (choice === 'Add an engineer') {
+    
+        } else if (choice === 'Add an intern') {
+
+        }else if (choice === 'Finish building team'){}
+        
+        });
+
+}
+
+
+start();
+
+
+
