@@ -1,17 +1,7 @@
 const inquirer = require("inquirer");
 const fs = "fs";
 
-const questions = [
-    {
-        type: "list",
-        name: "addTeamMember",
-        message: "What would you like to do?",
-        choices: ["Add an engineer", "Add an intern", "Finish building team"],
-
-    },
-]
-
-const managerQuestions = [
+const initialQuestions = [
   {
     type: "input",
     name: "managerName",
@@ -90,10 +80,10 @@ const internQuestions = [
 ];
 
 function start(){
-    inquirer.prompt(managerQuestions).then((managerAnswers) => {
-        console.log(managerAnswers);
+    inquirer.prompt(initialQuestions).then((initialAnswers) => {
+        console.log(initialAnswers);
 
-        var choice = managerAnswers.addTeamMember;
+        var choice = initialAnswers.addTeamMember;
         if (choice === 'Add an engineer') {
     
         } else if (choice === 'Add an intern') {
