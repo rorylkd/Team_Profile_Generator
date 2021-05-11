@@ -1,6 +1,8 @@
 const inquirer = require("inquirer");
 const fs = "fs";
 
+const teamMembersArray = [];
+
 const initialQuestions = [
   {
     type: "input",
@@ -92,7 +94,8 @@ const internQuestions = [
 
 function start() {
   inquirer.prompt(initialQuestions).then((initialAnswers) => {
-    console.log("initialAnswers:", initialAnswers);
+    // console.log("initialAnswers:", initialAnswers);
+    teamMembersArray.push(initialAnswers);
 
     var choice = initialAnswers.addTeamMember;
     if (choice === "Add an engineer") {
@@ -107,7 +110,8 @@ function start() {
 
 function engineer() {
   inquirer.prompt(engineerQuestions).then((engineerAnswers) => {
-    console.log("engineerAnswers:", engineerAnswers);
+    // console.log("engineerAnswers:", engineerAnswers);
+    teamMembersArray.push(engineerAnswers);
 
     var choice = engineerAnswers.addTeamMember;
     if (choice === "Add an engineer") {
@@ -122,7 +126,8 @@ function engineer() {
 
 function intern() {
   inquirer.prompt(internQuestions).then((internAnswers) => {
-    console.log("internAnswers:", internAnswers);
+    // console.log("internAnswers:", internAnswers);
+    teamMembersArray.push(internAnswers);
 
     var choice = internAnswers.addTeamMember;
     if (choice === "Add an engineer") {
@@ -135,6 +140,9 @@ function intern() {
   });
 }
 
-function exit() {}
+function exit() {
+  console.log('Your team profile has been generated!');
+  console.log(teamMembersArray);
+}
 
 start();
