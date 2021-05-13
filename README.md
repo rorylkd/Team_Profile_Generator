@@ -9,7 +9,7 @@
 1. [Description](#description)
 2. [Usage](#usage)
 3. [Screenshots](#screenshots)
-4. [Link to video tutorial](#Link to video tutorial)
+4. [Link to video tutorial](#video_tutorial)
 
 
   
