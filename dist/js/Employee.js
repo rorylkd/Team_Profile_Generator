@@ -14,7 +14,11 @@ class Employee {
     if (idless) {
       throw Error("Please provide an id");
     }
-    if (!(email.includes('@'))){throw Error("Please provide a valid email");}
+    if (!email.includes("@")) {
+      throw Error("Please provide a valid email");
+    }
+    const regexLettersAndSpecialChars = /^[a-zA-Z!@#\$%\^\&*\)\(+=._-]/
+    if (id.match(regexLettersAndSpecialChars)){throw Error("Please provide a valid id")}
   }
 }
 

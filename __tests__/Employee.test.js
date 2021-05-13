@@ -24,7 +24,7 @@ describe("Employee", () => {
   });
   test("throws an error if id includes letters or special characters", () => {
     expect(() => {
-      new Employee("Amy", "Amy?", "hotmale@hotmail.com");
+      new Employee("Amy", "Amy?-+=", "hotmale@hotmail.com");
     }).toThrow("Please provide a valid id");
   });
   test("throws an error if email does not include @", () => {
