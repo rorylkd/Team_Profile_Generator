@@ -28,4 +28,6 @@ header {
 
 p{
     margin: 10px;
+    text-align: center;
+    font-family: monospace;
 }

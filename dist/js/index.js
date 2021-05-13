@@ -5,9 +5,6 @@ const Manager = require("./Manager.js");
 const Intern = require("./Intern.js");
 const Engineer = require("./Engineer.js");
 
-//This empty array will be populated with the team member objects depending on user input
-const teamMembersArray = [];
-
 // We have several arrays of question objects below that are called depending on which inquirer prompt is called
 const managerQuestions = [
   {
@@ -106,9 +103,33 @@ const whichEmployee = [
     choices: ["Add an intern", "Add an engineer"],
   },
 ];
-// There can only be one manager! Which is why the start function creates a new manager object from the Manager class,
-// then pushes that manager object onto the teamMembersArray. We go onto the menu function next, or the exit fucntion if the team is very small.
+// There can only be one manager! Which is why the start function creates a new manager object from the Manager class.
+// It also writes a div to the newfile.html file. This is dynamically generated using the user input.
+// Then we're either taken back to the menu, or we exit.
 function start() {
+  // This writes the first part of the html to the file
+  fs.appendFile(
+    "../html/newfile.html",
+    `<!DOCTYPE html>
+
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Team Profile" />
+        <title>Team Profile</title>
+        <link rel="stylesheet" href="../css/style.css" />
+      </head>
+    
+      <body>
+        <header>My Team</header>
+    
+        <section class="container">`,
+    (err) => {
+      if (err) {
+        console.log("Error");
+      }
+    }
+  );
   inquirer.prompt(managerQuestions).then((managerAnswers) => {
     const newManagerObject = new Manager(
       managerAnswers.managerName,
@@ -116,7 +137,23 @@ function start() {
       managerAnswers.managerEmail,
       managerAnswers.managerOfficeNumber
     );
-    teamMembersArray.push(newManagerObject);
+
+    fs.appendFile(
+      "../html/newfile.html",
+      `   <div class="card">
+            <p>${newManagerObject.name}</p>
+            <p>${newManagerObject.constructor.name}</p>
+            <p>ID: ${newManagerObject.id}</p>
+            <p>Email: ${newManagerObject.email}</p>
+            <p>Office Number: ${newManagerObject.officeNumber}</p>
+          </div>
+          `,
+      (err) => {
+        if (err) {
+          console.log("Error");
+        }
+      }
+    );
 
     var choice = managerAnswers.addTeamMember;
     if (choice === "Add another team member") {
@@ -139,7 +176,8 @@ function addTeamMember() {
   });
 }
 
-//Engineer function ceates a new engineer object from the engineer class and pushes it into the team array.
+//Engineer function ceates a new engineer object from the engineer class.
+// It also writes a div to the newfile.html file. This is dynamically generated using the user input.
 // Then we're either taken back to the menu, or we exit.
 function engineer() {
   inquirer.prompt(engineerQuestions).then((engineerAnswers) => {
@@ -149,7 +187,23 @@ function engineer() {
       engineerAnswers.engineerEmail,
       engineerAnswers.engineerGithub
     );
-    teamMembersArray.push(newEngineerObject);
+
+    fs.appendFile(
+      "../html/newfile.html",
+      `   <div class="card">
+            <p>${newEngineerObject.name}</p>
+            <p>${newEngineerObject.constructor.name}</p>
+            <p>ID: ${newEngineerObject.id}</p>
+            <p>Email: ${newEngineerObject.email}</p>
+            <p>Github Profile: ${newEngineerObject.github}</p>
+          </div>
+          `,
+      (err) => {
+        if (err) {
+          console.log("Error");
+        }
+      }
+    );
 
     var choice = engineerAnswers.addTeamMember;
     if (choice === "Add another team member") {
@@ -163,14 +217,28 @@ function engineer() {
 // You get it
 function intern() {
   inquirer.prompt(internQuestions).then((internAnswers) => {
-    // teamMembersArray.push(internAnswers);
     const newInternObject = new Intern(
       internAnswers.internName,
       internAnswers.internID,
       internAnswers.internEmail,
       internAnswers.internSchool
     );
-    teamMembersArray.push(newInternObject);
+    fs.appendFile(
+      "../html/newfile.html",
+      `   <div class="card">
+            <p>${newInternObject.name}</p>
+            <p>${newInternObject.constructor.name}</p>
+            <p>ID: ${newInternObject.id}</p>
+            <p>Email: ${newInternObject.email}</p>
+            <p>School: ${newInternObject.school}</p>
+          </div>
+          `,
+      (err) => {
+        if (err) {
+          console.log("Error");
+        }
+      }
+    );
 
     var choice = internAnswers.addTeamMember;
     if (choice === "Add another team member") {
@@ -180,11 +248,20 @@ function intern() {
     }
   });
 }
+// This truncates the file so it starts empty
+function init() {
+  fs.truncate("../html/newfile.html", 0, () => {
+    console.log("");
+  });
+}
 
-function writeToFile(fileName, teamMembersArray) {
+// This function finishes up the html file.
+function exit() {
   fs.appendFile(
-    fileName,
-    `"Hello"`,
+    "../html/newfile.html",
+    `</section>
+    </body>
+  </html>`,
     (err) => {
       if (err) {
         console.log("Error");
@@ -192,13 +269,5 @@ function writeToFile(fileName, teamMembersArray) {
     }
   );
 }
-     
-
-// This function prints a nice message and spits out the array into the console so I can see it
-function exit() {
-  console.log("Your team profile has been generated!");
-  console.log(teamMembersArray);
-  writeToFile("newfile.html", teamMembersArray);
-}
-
+init();
 start();
