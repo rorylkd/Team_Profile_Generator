@@ -12,4 +12,9 @@ describe("Employee", () => {
       new Employee("Amy", 3, "");
     }).toThrow("Please provide an email");
   });
+  test("throws an error if no id is given", () => {
+    expect(() => {
+      new Employee("Amy", "", "hotmale@hotmail.com");
+    }).toThrow("Please provide an id");
+  });
 });
