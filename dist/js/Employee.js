@@ -4,7 +4,7 @@ const nameless =
 name === ""; 
 
 if (nameless){
-    throw Error("Please provide answers to all the prompts");
+    throw Error("Please provide a name");
 }
 
 
