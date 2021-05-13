@@ -32,4 +32,5 @@ describe("Employee", () => {
       new Employee("Amy", 3, "notAnEmail");
     }).toThrow("Please provide a valid email");
   });
+  
 });
