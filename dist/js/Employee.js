@@ -17,8 +17,14 @@ class Employee {
     if (!email.includes("@")) {
       throw Error("Please provide a valid email");
     }
-    const regexLettersAndSpecialChars = /^[a-zA-Z!@#\$%\^\&*\)\(+=._-]/
-    if (id.match(regexLettersAndSpecialChars)){throw Error("Please provide a valid id")}
+    // const regexLettersAndSpecialChars = /^[a-zA-Z!@#\$%\^\&*\)\(+=._-]/;
+    // if (id.match(regexLettersAndSpecialChars)) {
+    //   throw Error("Please provide a valid id");
+    // }
+    const regexNumbersAndSpecialChars = /^[0-9!@#\$%\^\&*\)\(+=._-]/;
+    if (name.match(regexNumbersAndSpecialChars)) {
+      throw Error("Please provide a valid name");
+    }
   }
 }
 
