@@ -8,8 +8,7 @@
 ## Table of Contents
 1. [Description](#description)
 2. [Usage](#usage)
-3. [Screenshots](#screenshots)
-4. [Link to video tutorial](#video_tutorial)
+3. [Link to video tutorial](#video_tutorial)
 
 
   
