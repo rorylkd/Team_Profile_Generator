@@ -1,9 +1,13 @@
 const inquirer = require("inquirer");
 const fs = "fs";
+const Employee = require("./Employee.js");
+const Manager = require("./Manager.js");
+const Intern = require("./Intern.js");
+const Engineer = require("./Engineer.js");
 
 const teamMembersArray = [];
 
-const initialQuestions = [
+const managerQuestions = [
   {
     type: "input",
     name: "managerName",
@@ -30,7 +34,7 @@ const initialQuestions = [
     type: "list",
     name: "addTeamMember",
     message: "What would you like to do?",
-    choices: ["Add an engineer", "Add an intern", "Finish building team"],
+    choices: ["Add another team member", "Finish building team"],
   },
 ];
 
@@ -59,7 +63,7 @@ const engineerQuestions = [
     type: "list",
     name: "addTeamMember",
     message: "What would you like to do?",
-    choices: ["Add an engineer", "Add an intern", "Finish building team"],
+    choices: ["Add another team member", "Finish building team"],
   },
 ];
 
@@ -88,21 +92,29 @@ const internQuestions = [
     type: "list",
     name: "addTeamMember",
     message: "What would you like to do?",
-    choices: ["Add an engineer", "Add an intern", "Finish building team"],
+    choices: ["Add another team member", "Finish building team"],
+  },
+];
+
+const whichEmployee = [
+  {
+    type: "list",
+    name: "addTeamMember",
+    message: "What would you like to do?",
+    choices: ["Add an intern", "Add an engineer"],
   },
 ];
 
 function start() {
-  inquirer.prompt(initialQuestions).then((initialAnswers) => {
-    // console.log("initialAnswers:", initialAnswers);
-    teamMembersArray.push(initialAnswers);
+  inquirer.prompt(managerQuestions).then((managerAnswers) => {
+    // teamMembersArray.push(initialAnswers);
+    const newManagerObject = new Manager(managerAnswers.managerName, managerAnswers.managerID, managerAnswers.managerEmail, managerAnswers.managerOfficeNumber)
+    teamMembersArray.push(newManagerObject);
 
-    var choice = initialAnswers.addTeamMember;
-    if (choice === "Add an engineer") {
-      engineer();
-    } else if (choice === "Add an intern") {
-      intern();
-    } else if (choice === "Finish building team") {
+    var choice = managerAnswers.addTeamMember;
+    if (choice === "Add another team member") {
+      addTeamMember();
+    } else {
       exit();
     }
   });
@@ -110,15 +122,14 @@ function start() {
 
 function engineer() {
   inquirer.prompt(engineerQuestions).then((engineerAnswers) => {
-    // console.log("engineerAnswers:", engineerAnswers);
-    teamMembersArray.push(engineerAnswers);
+    // teamMembersArray.push(engineerAnswers);
+    const newEngineerObject = new Engineer(engineerAnswers.engineerName, engineerAnswers.engineerID, engineerAnswers.engineerEmail, engineerAnswers.engineerGithub);
+teamMembersArray.push(newEngineerObject);
 
     var choice = engineerAnswers.addTeamMember;
-    if (choice === "Add an engineer") {
-      engineer();
-    } else if (choice === "Add an intern") {
-      intern();
-    } else if (choice === "Finish building team") {
+    if (choice === "Add another team member") {
+      addTeamMember();
+    } else {
       exit();
     }
   });
@@ -126,23 +137,34 @@ function engineer() {
 
 function intern() {
   inquirer.prompt(internQuestions).then((internAnswers) => {
-    // console.log("internAnswers:", internAnswers);
-    teamMembersArray.push(internAnswers);
+    // teamMembersArray.push(internAnswers);
+    const newInternObject = new Intern(internAnswers.internName, internAnswers.internID, internAnswers.internEmail, internAnswers.internSchool);
+teamMembersArray.push(newInternObject);
 
     var choice = internAnswers.addTeamMember;
-    if (choice === "Add an engineer") {
-      engineer();
-    } else if (choice === "Add an intern") {
-      intern();
-    } else if (choice === "Finish building team") {
+    if (choice === "Add another team member") {
+      addTeamMember();
+    } else {
       exit();
     }
   });
 }
 
+function addTeamMember() {
+  inquirer.prompt(whichEmployee).then((whichEmployeeAnswers) => {
+    var choice = whichEmployeeAnswers.addTeamMember;
+    if (choice === "Add an engineer") {
+      engineer();
+    } else if (choice === "Add an intern") {
+      intern();
+    }
+  });
+}
+
 function exit() {
-  console.log('Your team profile has been generated!');
+  console.log("Your team profile has been generated!");
   console.log(teamMembersArray);
 }
 
 start();
+exports.teamMembersArray = teamMembersArray;

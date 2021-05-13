@@ -2,6 +2,10 @@
 const { test, expect } = require("@jest/globals");
 const Intern = require("../dist/js/Intern");
 
-test('adds 1 + 2 to equal 3', () => {
-    expect(Intern(1,2)).toBe(3);
+describe("Intern", () => {
+    test("throws an error if no school is given", () => {
+      expect(() => {
+        new Intern("Amy", 3, "hotmale@hotmail.com", "");
+      }).toThrow("Please provide a school");
+    });
 });
