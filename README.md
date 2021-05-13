@@ -1,1 +1,26 @@
 ## Team_Profile_Generator
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[MIT License](https://choosealicense.com/licenses/mit/)
+
+# README Generator
+
+## Table of Contents
+1. [Description](#description)
+2. [Usage](#usage)
+3. [Screenshots](#screenshots)
+4. [Link to video tutorial](#Link to video tutorial)
+
+
+  
+## Description <a name="description"><a/>
+
+This application accepts user input from the command line and dynamically generates a team profile.
+
+## Usage <a name="usage"><a/>
+
+Once the user starts the application they are presented with a series of prompts. Once these are answered the information will be written to "newfile.html".
+
+
+
+
