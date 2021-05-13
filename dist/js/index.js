@@ -1,5 +1,5 @@
 const inquirer = require("inquirer");
-const fs = "fs";
+const fs = require("fs");
 const Employee = require("./Employee.js");
 const Manager = require("./Manager.js");
 const Intern = require("./Intern.js");
@@ -181,11 +181,24 @@ function intern() {
   });
 }
 
+function writeToFile(fileName, teamMembersArray) {
+  fs.appendFile(
+    fileName,
+    `"Hello"`,
+    (err) => {
+      if (err) {
+        console.log("Error");
+      }
+    }
+  );
+}
+     
+
 // This function prints a nice message and spits out the array into the console so I can see it
 function exit() {
   console.log("Your team profile has been generated!");
   console.log(teamMembersArray);
+  writeToFile("newfile.html", teamMembersArray);
 }
 
 start();
-exports.teamMembersArray = teamMembersArray;
