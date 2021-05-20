@@ -3,8 +3,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [MIT License](https://choosealicense.com/licenses/mit/)
 
-# README Generator
-
 ## Table of Contents
 1. [Description](#description)
 2. [Usage](#usage)
